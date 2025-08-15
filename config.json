@@ -1,0 +1,57 @@
+{
+  "UserConfig": {
+    "NamespaceConfig": [
+      {
+        "Name": "banking-namespace",
+        "UserConfig": {
+          "QueueConfig": [
+            {
+              "Name": "banking-transactions",
+              "Properties": {
+                "MaxDeliveryCount": 3,
+                "LockDuration": "PT30S",
+                "DefaultMessageTimeToLive": "PT1H",
+                "DeadLetteringOnMessageExpiration": true,
+                "RequiresSession": false,
+                "DuplicateDetectionHistoryTimeWindow": "PT10M",
+                "RequiresDuplicateDetection": true,
+                "EnableBatchedOperations": true,
+                "MaxSizeInMegabytes": 1024
+              }
+            }
+          ],
+          "TopicConfig": [
+            {
+              "Name": "banking-events",
+              "Properties": {
+                "MaxDeliveryCount": 3,
+                "DefaultMessageTimeToLive": "PT1H",
+                "DeadLetteringOnMessageExpiration": true,
+                "RequiresDuplicateDetection": true,
+                "DuplicateDetectionHistoryTimeWindow": "PT10M",
+                "EnableBatchedOperations": true,
+                "MaxSizeInMegabytes": 1024
+              },
+              "SubscriptionConfig": [
+                {
+                  "Name": "transaction-processor",
+                  "Properties": {
+                    "MaxDeliveryCount": 3,
+                    "LockDuration": "PT30S",
+                    "DefaultMessageTimeToLive": "PT1H",
+                    "DeadLetteringOnMessageExpiration": true,
+                    "RequiresSession": false,
+                    "EnableBatchedOperations": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "LoggingConfig": {
+      "Type": "File"
+    }
+  }
+}
